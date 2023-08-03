@@ -14,18 +14,18 @@ import java.util.UUID;
 @Controller
 public class CustomerController {
 
-    private String bearerToken = ""; // Store the bearer token received after authentication
+    private String bearerToken = ""; 
 
-    // Simulated in-memory customer list
+    
     private List<Customer> customers = new ArrayList<>();
 
 
 
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticateUser(@RequestBody AuthRequest authRequest) {
-        // Simulate authentication using the provided login_id and password
+        
         if (authRequest.getLogin_id().equals("test@sunbasedata.com") && authRequest.getPassword().equals("Test@123")) {
-            // Hardcoded token for demonstration purposes, but in a real-world scenario, it should be obtained from the API response
+           
             bearerToken = "dummy_bearer_token";
             return ResponseEntity.ok().body(bearerToken);
         } else {
@@ -43,7 +43,7 @@ public class CustomerController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("First Name or Last Name is missing");
         }
 
-        // Simulate generating a UUID for the customer
+        
         UUID uuid = UUID.randomUUID();
         customer.setUuid(uuid.toString());
 
@@ -100,12 +100,12 @@ public class CustomerController {
         return ResponseEntity.ok("Successfully deleted");
     }
 
-    // Helper method to check if the provided authorization token matches the expected bearer token
+   
     private boolean isValidAuthorization(String authHeader) {
         return authHeader != null && authHeader.startsWith("Bearer " + bearerToken);
     }
 
-    // Helper method to find a customer by UUID
+    
     private Customer findCustomerByUuid(String uuid) {
         return customers.stream()
                 .filter(customer -> customer.getUuid().equals(uuid))
@@ -115,18 +115,18 @@ public class CustomerController {
 
     @GetMapping("/")
     public String loginPage() {
-        return "index"; // This will return the "index.html" page from the "templates" directory
+        return "index";
     }
 
     @GetMapping("/customer")
     public String customerListPage(Model model) {
         Customer customer = new Customer();
         model.addAttribute("customers", customer);
-        return "customer"; // This will return the "customer.html" page from the "templates" directory
+        return "customer"; 
     }
 
     @GetMapping("/add-customer")
     public String addCustomerPage() {
-        return "add_customer"; // This will return the "add_customer.html" page from the "templates" directory
+        return "add_customer";
     }
 }
