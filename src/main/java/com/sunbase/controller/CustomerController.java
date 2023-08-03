@@ -3,6 +3,7 @@ package com.sunbase.controller;
 import com.sunbase.customer.Customer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 public class CustomerController {
 
     private String bearerToken = ""; // Store the bearer token received after authentication
